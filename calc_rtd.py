@@ -39,6 +39,8 @@ k = (cdr(cons(3,4)))
 	
 print(k)
 '''
+import numpy as np
+
 r0=100    
 a=3.9083e-3
 b=-5.775e-7
@@ -46,3 +48,23 @@ c=-4.183e-12
 def rtd(T):
 	Rt = r0 * (1 + a*T + b*T**2 + c*(T-100) * T**3)
 	return Rt
+
+def percent_rtd(T):
+	first = a*T 
+	second = b * T**2
+	third = - 100 * c * T**3
+	fourth = c * T**4
+	Rt = 1 + a*T + b*T**2 + c*(T-100) * T**3
+	fir_per = first 
+	sec_per = second 
+	thi_per = third 
+	fou_per = fourth 
+	one_per = 1 
+	print(Rt)
+	return fir_per, sec_per, thi_per, fou_per ,one_per
+temp = input('input temp here: ')
+Rt = rtd(float(temp))
+print('this is Rt: ', Rt)
+p = ([c*r0, -100*c*r0, b*r0, a*r0, 1*r0-Rt])
+print('this is the temp: ', np.roots(p))
+
